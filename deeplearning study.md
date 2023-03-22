@@ -42,7 +42,7 @@ x.grad.data_zero_()
 
 **详解.backward()**
 
-参数：grad_tensors
+浅析
 
 ```python
 
@@ -65,4 +65,34 @@ tensor([2., 3., 4.], requires_grad=True)
 tensor([ 512.,  768., 1024.], grad_fn=<MulBackward0>)
 tensor([256., 256., 256.])
 ```
+
+参数：**grad_tensors**(查看需要记录梯度的参数的梯度值)
+
+
+
+
+
+讨论两种情况
+
+```python
+x = torch.tensor([2,2])
+
+#Case 1
+y = x * x
+y.sum().backward()
+
+#Case 2
+y = torch.dot(x,x)
+y.backward()
+```
+
+这两种情况求出的x的梯度是一致的，区别在于，第一种情况相当于
+
+X = [x0,x1] ,Y =X + 2 = [x0 * x1, x1  * x0]
+
+如果直接对X求导相当于矩阵对矩阵求导，无法计算
+
+所以需要y.sum() 变成 Y = x0 * x1 + x1*x0(其实此处改为加法更加直观)
+
+
 
