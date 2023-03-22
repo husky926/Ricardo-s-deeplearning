@@ -14,6 +14,8 @@ torch.asin(input，out=None)#正弦
 torch.add(input,value,out=None)#每个值加上value
 torch.div(input,other,out=None)#input对应除以other
 torch.from_numpy(A)#numpy转换成tensor
+torch.mm(a,b)#矩阵ab相乘
+tensor.view() = tensor.reshape#view方法进行形状重构需要保证原始tensor在内存空间中分布连续,reshape不需要
 ```
 
 **梯度计算**
@@ -96,3 +98,35 @@ X = [x0,x1] ,Y =X + 2 = [x0 * x1, x1  * x0]
 
 
 
+## softmax回归
+
+```python
+x.sum(0,keepdim=True)
+```
+
+ 如果keepdims这个参数为True，被删去的维度在结果矩阵中就被设置为一。 
+
+```PYTHON
+torch.exp(x)
+```
+
+相当于e的x次方，如果是张量，结果就是e次方的张量
+
+```python
+torch.shape(0/1)
+```
+
+0是行数，1是列数
+
+```python
+#训练模型
+model.train()
+#计算预测正确的数量
+model.eval()
+#建立神经网络
+torch.nn.Module
+#比较类型
+isinstance(a,b)
+```
+
+建立神经网络
